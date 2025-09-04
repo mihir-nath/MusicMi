@@ -1,0 +1,107 @@
+﻿<Window x:Class="MusicMi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MusicMi"
+        mc:Ignorable="d"
+        Title="MusicMi" Height="450" Width="800">
+    <Grid Background="White">
+        <!-- Root layout -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <!-- Sidebar -->
+            <ColumnDefinition Width="*"/>
+            <!-- Main Content -->
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+            <!-- Player Bar -->
+        </Grid.RowDefinitions>
+
+        <!-- Sidebar -->
+        <StackPanel Grid.Column="0" Grid.Row="0" Background="#FFF9F9F9" Orientation="Vertical">
+            <TextBlock Text="LIBRARY" Margin="20 30 0 10" FontWeight="Bold" Foreground="#6FD9B4" FontSize="20"/>
+            <Button Content="Home" Style="{StaticResource menuButton}" Background="#1ABC9C" Foreground="White" />
+            <Button Content="Playlists" Style="{StaticResource menuButton}"  Background="Transparent"/>
+            <Button Content="Artists" Style="{StaticResource menuButton}"  Background="Transparent"/>
+            <Button Content="Albums" Style="{StaticResource menuButton}"  Background="Transparent"/>
+            <Button Content="Songs" Style="{StaticResource menuButton}"  Background="Transparent"/>
+
+        </StackPanel>
+
+        <!-- Main Content -->
+        <Grid Grid.Column="1" Grid.Row="0" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Daily Singer Section -->
+            <Border Background="#1ABC9C" CornerRadius="20" Padding="20" Margin="0 0 20 0">
+                <StackPanel>
+                    <TextBlock Text="Daily Singer" FontWeight="Bold" FontSize="18" Foreground="White"/>
+                    <TextBlock Text="Taylor Swift" Margin="0 5 0 20" Foreground="White" Opacity="0.7"/>
+
+                    <Ellipse Width="200" Height="200" Fill="LightPink" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Border>
+
+            <!-- Popular & Playlist Section -->
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="Home" FontWeight="Bold" FontSize="18" Foreground="Black" Margin="0 0 0 10"/>
+                <StackPanel>
+                    <Border Background="#F1F1F1" CornerRadius="8" Padding="10" Margin="0 5">
+                        <TextBlock Text="My House      03:13"/>
+                    </Border>
+                    <Border Background="#1ABC9C" CornerRadius="8" Padding="10" Margin="0 5">
+                        <TextBlock Text="Blank Space   04:02" Foreground="White"/>
+                    </Border>
+                    <Border Background="#F1F1F1" CornerRadius="8" Padding="10" Margin="0 5">
+                        <TextBlock Text="Love Story     05:04"/>
+                    </Border>
+                    <Border Background="#F1F1F1" CornerRadius="8" Padding="10" Margin="0 5">
+                        <TextBlock Text="Red Home     03:27"/>
+                    </Border>
+                    <Border Background="#F1F1F1" CornerRadius="8" Padding="10" Margin="0 5">
+                        <TextBlock Text="Red Home     03:27"/>
+                    </Border>
+                    <Border Background="#F1F1F1" CornerRadius="8" Padding="10" Margin="0 5">
+                        <TextBlock Text="Red Home     03:27"/>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        
+        <!-- Player Bar -->
+        <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#1ABC9C" CornerRadius="10 10 0 0">
+            <DockPanel VerticalAlignment="Center"  Margin="20 0">
+                <Slider DockPanel.Dock="Top"  Minimum="0" Maximum="100" Margin="50 0" Height="20"/>
+                <!-- Now Playing -->
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" >
+                    <Button Content="📂" Background="Transparent" Foreground ="White" Height="30" Width="30" Margin="5 0" BorderThickness="0" FontSize="20"/>
+                    <Button Content="🔁" Background="Transparent" Foreground ="White" Height="30" Width="30"  BorderThickness="0" FontSize="20"/>
+                    <Button Content="🔀" Background="Transparent" Foreground ="White" Height="30" Width="30" Margin="5 0" BorderThickness="0" FontSize="20"/>
+
+                </StackPanel>
+                
+                <!-- Controls -->
+                <StackPanel DockPanel.Dock="Left"  Orientation="Horizontal" HorizontalAlignment="Center" Margin="100 0">
+                    <Button Content="⏮️" Style="{StaticResource playerButton}"/>
+                    <Button Content="⏯️" Style="{StaticResource playerButton}"/>
+                    <Button Content="⏭" Style="{StaticResource playerButton}"/>
+                </StackPanel>
+
+                
+
+                <!-- Volume -->
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <TextBlock Text="🔊" VerticalAlignment="Center" FontSize="20" Foreground="White"/>
+                    <Slider  VerticalAlignment="Center" Width="100" Margin="0 0 20 0"  Value="50"/>
+                </StackPanel>
+                
+            </DockPanel>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "w4o3w4cNK1JfJ47tp9rWQQlVj+08fPVDC2SxIJEgn2UjKm7sSwOZ3SUMzrrGNEj3Vu1REEVVqFOfLq9Hca4dLQ==",
+  "success": true,
+  "projectFilePath": "E:\\my data\\Projects\\MusicMi\\MusicMi\\MusicMi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\MNH5\\.nuget\\packages\\taglibsharp\\2.3.0\\taglibsharp.2.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}
