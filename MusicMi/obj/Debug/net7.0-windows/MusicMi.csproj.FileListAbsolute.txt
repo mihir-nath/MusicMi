@@ -22,3 +22,4 @@ E:\my data\Projects\MusicMi\MusicMi\obj\Debug\net7.0-windows\ref\MusicMi.dll
 E:\my data\Projects\MusicMi\MusicMi\bin\Debug\net7.0-windows\TagLibSharp.dll
 E:\my data\Projects\MusicMi\MusicMi\obj\Debug\net7.0-windows\MusicMi.csproj.CopyComplete
 E:\my data\Projects\MusicMi\MusicMi\obj\Debug\net7.0-windows\App.baml
+E:\my data\Projects\MusicMi\MusicMi\obj\Debug\net7.0-windows\GeneratedInternalTypeHelper.g.cs

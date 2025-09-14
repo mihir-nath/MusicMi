@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:MusicMi"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <local:MainViewModel x:Key="MainVM"/>
         <Style x:Key="menuButton" TargetType="Button">
             <Setter Property="Foreground" Value="#6FD9B4" />
             <Setter Property="Background" Value="Transparent"/>

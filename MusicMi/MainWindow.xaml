@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicMi"
         mc:Ignorable="d"
-        Title="MusicMi" Height="450" Width="800">
+        Title="MusicMi" Height="450" Width="800"
+        DataContext="{StaticResource MainVM}">
+
+    
     <Grid Background="White">
         <!-- Root layout -->
         <Grid.ColumnDefinitions>
@@ -41,56 +44,58 @@
             <!-- Daily Singer Section -->
             <Border Background="#1ABC9C" CornerRadius="20" Padding="20" Margin="0 0 20 0">
                 <StackPanel>
-                    <TextBlock Text="Daily Singer" FontWeight="Bold" FontSize="18" Foreground="White"/>
-                    <TextBlock Text="Taylor Swift" Margin="0 5 0 20" Foreground="White" Opacity="0.7"/>
+                    <TextBlock Text="{Binding Song.Title}" FontWeight="Bold" FontSize="18" Foreground="White"/>
+                    <TextBlock Text="{Binding Song.Artist}" Margin="0 5 0 20" Foreground="White" Opacity="0.7"/>
 
-                    <Ellipse Width="200" Height="200" Fill="LightPink" HorizontalAlignment="Center" />
+                    <Ellipse Width="200" Height="200"  HorizontalAlignment="Center" >
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding Song.AlbumArt}" />
+                        </Ellipse.Fill>
+                    </Ellipse>
                 </StackPanel>
             </Border>
 
             <!-- Popular & Playlist Section -->
             <StackPanel Grid.Column="1">
-                <TextBlock Text="Home" FontWeight="Bold" FontSize="18" Foreground="Black" Margin="0 0 0 10"/>
-                <StackPanel>
-                    <Border Background="#F1F1F1" CornerRadius="8" Padding="10" Margin="0 5">
-                        <TextBlock Text="My House      03:13"/>
-                    </Border>
-                    <Border Background="#1ABC9C" CornerRadius="8" Padding="10" Margin="0 5">
-                        <TextBlock Text="Blank Space   04:02" Foreground="White"/>
-                    </Border>
-                    <Border Background="#F1F1F1" CornerRadius="8" Padding="10" Margin="0 5">
-                        <TextBlock Text="Love Story     05:04"/>
-                    </Border>
-                    <Border Background="#F1F1F1" CornerRadius="8" Padding="10" Margin="0 5">
-                        <TextBlock Text="Red Home     03:27"/>
-                    </Border>
-                    <Border Background="#F1F1F1" CornerRadius="8" Padding="10" Margin="0 5">
-                        <TextBlock Text="Red Home     03:27"/>
-                    </Border>
-                    <Border Background="#F1F1F1" CornerRadius="8" Padding="10" Margin="0 5">
-                        <TextBlock Text="Red Home     03:27"/>
-                    </Border>
-                </StackPanel>
+                <TextBlock Text="Songs" FontWeight="Bold" FontSize="18" Foreground="Black" Margin="0 0 0 10"/>
+                <ListBox ItemsSource="{Binding Songs}"
+                         SelectedItem="{Binding Song, Mode=TwoWay}"
+                         Background="Transparent"
+                         BorderThickness="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="#F1F1F1" CornerRadius="8" Padding="10" Margin="0 5">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Title}" Width="100"/>
+                                    <TextBlock Text="{Binding Artist}" Width="50"/>
+                                    <TextBlock Text="{Binding AlbumDuration}" Width="0"/>
+                                </StackPanel>
+                                
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                
             </StackPanel>
         </Grid>
         
         <!-- Player Bar -->
         <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#1ABC9C" CornerRadius="10 10 0 0">
             <DockPanel VerticalAlignment="Center"  Margin="20 0">
-                <Slider DockPanel.Dock="Top"  Minimum="0" Maximum="100" Margin="50 0" Height="20"/>
+                <Slider DockPanel.Dock="Top"  Minimum="0" Maximum="100" Margin="50 0" Height="20" Value="{Binding Progress ,Mode=TwoWay}"/>
                 <!-- Now Playing -->
                 <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" >
-                    <Button Content="📂" Background="Transparent" Foreground ="White" Height="30" Width="30" Margin="5 0" BorderThickness="0" FontSize="20"/>
-                    <Button Content="🔁" Background="Transparent" Foreground ="White" Height="30" Width="30"  BorderThickness="0" FontSize="20"/>
-                    <Button Content="🔀" Background="Transparent" Foreground ="White" Height="30" Width="30" Margin="5 0" BorderThickness="0" FontSize="20"/>
+                    <Button Content="📂" Background="Transparent" Foreground ="White" Height="30" Width="30" Margin="5 0" BorderThickness="0" FontSize="20" Command="{Binding OpenFileCommand}"/>
+                    <Button Content="🔁" Background="Transparent" Foreground ="White" Height="30" Width="30"  BorderThickness="0" FontSize="20" Command="{Binding RepeatCommand}"/>
+                    <Button Content="🔀" Background="Transparent" Foreground ="White" Height="30" Width="30" Margin="5 0" BorderThickness="0" FontSize="20" Command="{Binding RepeatCommand}"/>
 
                 </StackPanel>
                 
                 <!-- Controls -->
                 <StackPanel DockPanel.Dock="Left"  Orientation="Horizontal" HorizontalAlignment="Center" Margin="100 0">
-                    <Button Content="⏮️" Style="{StaticResource playerButton}"/>
-                    <Button Content="⏯️" Style="{StaticResource playerButton}"/>
-                    <Button Content="⏭" Style="{StaticResource playerButton}"/>
+                    <Button Content="⏮️" Style="{StaticResource playerButton}" Command="{Binding PreviousCommand}"/>
+                    <Button Content="⏯️" Style="{StaticResource playerButton}" Command="{Binding PlayPauseCommand}"/>
+                    <Button Content="⏭" Style="{StaticResource playerButton}" Command="{Binding NextCommand}"/>
                 </StackPanel>
 
                 
@@ -98,7 +103,7 @@
                 <!-- Volume -->
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                     <TextBlock Text="🔊" VerticalAlignment="Center" FontSize="20" Foreground="White"/>
-                    <Slider  VerticalAlignment="Center" Width="100" Margin="0 0 20 0"  Value="50"/>
+                    <Slider  VerticalAlignment="Center" Width="100" Margin="0 0 20 0" Minimum="0" Maximum="100"  Value="{Binding Volume}"/>
                 </StackPanel>
                 
             </DockPanel>
