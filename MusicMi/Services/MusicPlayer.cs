@@ -57,10 +57,26 @@ namespace MusicMi.Services
             };
             if(dlg.ShowDialog() == true )
             {
-                foreach( string file in dlg.FileNames )
+                string songsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Songs");
+                if (!Directory.Exists(songsFolder))
+                    Directory.CreateDirectory(songsFolder);
+
+                foreach ( string file in dlg.FileNames )
                 {
-                    var song =  LoadSongMetaData(file);
-                    playList.Add(song);
+                    try
+                    {
+                        string destFile = Path.Combine(songsFolder, Path.GetFileName(file));
+                        if (!File.Exists(destFile))
+                        {
+                            File.Copy(file, destFile, overwrite: false);
+                        }
+                        var song = LoadSongMetaData(file);
+                        playList.Add(song);
+                    } catch
+                    {
+                        Console.WriteLine("Error uploading File");
+                    }
+                    
                 }
             }
         }

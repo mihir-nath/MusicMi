@@ -15,4 +15,16 @@
     <Folder Include="Songs\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Songs\Bheegi_Saree_Shreya_Ghoshal_Adnan_Sami.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Songs\Gulabi_Saawariya_Sachet_Tandon_Shilpa_Rao.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Songs\Marjaana_Siddhaant_Miishhraa_B_Praak.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

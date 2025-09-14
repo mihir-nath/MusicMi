@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace MusicMi
         public ObservableCollection<Song> songs = new ObservableCollection<Song>();
         private double _progress;
         private bool _isPlaying;
-        private double _volume;
+        private double _volume = 0.5;
 
 
 
@@ -31,21 +32,22 @@ namespace MusicMi
             });*/
             OpenFileCommand = new RelayCommand((_) => { _player.UploadMusicFromFile(); });
             PlayPauseCommand = new RelayCommand((_) => {
-                if (IsPlaying) {
-                    _player.StopSong();
-                }
-                else
-                {
-                    _player.PlaySong(Song);
-                }
-                     
+                PlayPauseClicked();       
             });
             NextCommand = new RelayCommand((_) => { _player.NextSong(); });
             PreviousCommand = new RelayCommand((_) => { _player.PreviousSong(); });
             RepeatCommand = new RelayCommand((_) => { _player.Resume(); });
+            SeekCommand = new RelayCommand((p) =>
+            {
+                if (p is double value)
+                {
+                    _player.Seek(value);
+                }
+            });
             _player.ProgressChanged += (p) => Progress = p;
-            _player.SongChanged += (s) => Song = s;
+            //_player.SongChanged += (s) => Song = s;
             _player.PlayingStateChanged += (isPlaying) => IsPlaying = isPlaying;
+            _player.SongChanged += (s) => OnSongChanged(s);
             LoadSongsFromDirectory();
         }
         
@@ -53,16 +55,22 @@ namespace MusicMi
         private void LoadSongsFromDirectory()
         {
             songs.Clear();
-            foreach (var song in _player.LoadSongs(@"C:\Users\MNH5\Downloads"))
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Songs");
+            foreach (var song in _player.LoadSongs(path))
             {
                 songs.Add(song);
             }
-            Song = songs.FirstOrDefault();
+            //Song = songs.FirstOrDefault();
         }
         public Song Song 
         { 
             get { return _song; }
-            set { _song = value;
+            set { 
+                _song = value;
+                if(_song != null)
+                {
+                    _player.PlaySong(_song);
+                }
                 OnPropertyChanged(nameof(Song));
             }
         }
@@ -72,6 +80,7 @@ namespace MusicMi
             set
             {
                 _volume = value;
+                _player.SetVolume(Volume);
                 OnPropertyChanged(nameof(Volume));
             }
         }
@@ -108,9 +117,39 @@ namespace MusicMi
         public ICommand NextCommand { get; }
         public ICommand PreviousCommand { get; }
         public ICommand RepeatCommand { get; }
+        public ICommand SeekCommand { get; }
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private void OnSongChanged(Song song)
+        {
+            // Update property without triggering PlaySong again
+            _song = song;
+            OnPropertyChanged(nameof(Song));
+        }
+        public void SeekTo(double position)
+        {
+            _player.Seek(position);
+        }
+        public void PlayPauseClicked() {
+            if (Song == null && Songs !=null)
+            {
+                Song = Songs.FirstOrDefault();
+
+            }
+            else
+            {
+                if (IsPlaying)
+                {
+                    _player.StopSong();
+                }
+                else
+                {
+                    //_player.PlaySong(Song);
+                    _player.Resume();
+                }
+            }
         }
     }
 }

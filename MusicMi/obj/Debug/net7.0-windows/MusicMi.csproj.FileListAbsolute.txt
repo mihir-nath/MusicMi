@@ -23,3 +23,6 @@ E:\my data\Projects\MusicMi\MusicMi\bin\Debug\net7.0-windows\TagLibSharp.dll
 E:\my data\Projects\MusicMi\MusicMi\obj\Debug\net7.0-windows\MusicMi.csproj.CopyComplete
 E:\my data\Projects\MusicMi\MusicMi\obj\Debug\net7.0-windows\App.baml
 E:\my data\Projects\MusicMi\MusicMi\obj\Debug\net7.0-windows\GeneratedInternalTypeHelper.g.cs
+E:\my data\Projects\MusicMi\MusicMi\bin\Debug\net7.0-windows\Songs\Bheegi_Saree_Shreya_Ghoshal_Adnan_Sami.mp3
+E:\my data\Projects\MusicMi\MusicMi\bin\Debug\net7.0-windows\Songs\Gulabi_Saawariya_Sachet_Tandon_Shilpa_Rao.mp3
+E:\my data\Projects\MusicMi\MusicMi\bin\Debug\net7.0-windows\Songs\Marjaana_Siddhaant_Miishhraa_B_Praak.mp3
